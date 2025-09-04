@@ -8,6 +8,6 @@ TreeNode::TreeNode(int id, const string& cont,
         time_t last_mod_time, 
         const vector<TreeNode*>& childs):
         version_id(id), content(cont), message(msg),
-        created_timestamp(curr_time), snapshot_timestamp(snapshot_time),
-        parent(par), children(childs), last_modified_time(last_mod_time) {
+        created_timestamp(curr_time), snapshot_timestamp(snapshot_time), last_modified_time(last_mod_time),
+        parent(par), children(childs){
         }
