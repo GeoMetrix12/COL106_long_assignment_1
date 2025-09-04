@@ -13,7 +13,7 @@ void File::clean(TreeNode* node){
     delete node;
 }
 File::File(const string& name, HashMap& v_map) : version_map(v_map), filename(name), total_versions(1){
-    root = new TreeNode(0, "", "Initial Snapshot for root", nullptr, time(0), time(0));
+    root = new TreeNode(0, "", "Initial Snapshot for root", nullptr, time(0), time(0), time(0));
     active_version = root;
     version_map.insert(0, root);
 }
@@ -26,6 +26,7 @@ void File::read() const{
 void File::insert_content(const string& new_content){
     if(active_version->snapshot_timestamp == (time_t)0){
         active_version->content += new_content;
+        active_version->last_modified_time = time(0);
     }
     else{
         TreeNode* new_version = new TreeNode(total_versions, 
@@ -33,7 +34,8 @@ void File::insert_content(const string& new_content){
                                             "", 
                                             active_version, 
                                             time(0), 
-                                            (time_t)0);
+                                            (time_t)0,
+                                            time(0));
         active_version->children.push_back(new_version);
         active_version = new_version;
         version_map.insert(total_versions, new_version);
@@ -43,14 +45,16 @@ void File::insert_content(const string& new_content){
 void File::update_content(const string& upd_content){
     if(active_version->snapshot_timestamp == (time_t)0){
         active_version->content = upd_content;
+        active_version->last_modified_time = time(0);
     }
     else{
         TreeNode* new_version = new TreeNode(total_versions, 
                                             upd_content, 
                                             "", 
                                             active_version, 
-                                            time(0), 
-                                            (time_t)0);
+                                            time(0),
+                                            (time_t)0,
+                                            time(0));
         active_version->children.push_back(new_version);
         active_version = new_version;
         version_map.insert(total_versions, new_version);
@@ -64,6 +68,7 @@ void File::snapshot(const string& msg){
     }
     else{
         active_version->snapshot_timestamp = time(0);
+        active_version->last_modified_time = time(0);
         active_version->message = msg;
     }
 }
@@ -74,6 +79,7 @@ bool File::rollback(const int& v_id){
             return false;
         }
         active_version = active_version->parent;
+        active_version->last_modified_time = time(0);
         return true;
     }
     TreeNode* target_version = version_map.get(v_id);
@@ -82,6 +88,7 @@ bool File::rollback(const int& v_id){
         return false;
     }
     active_version = target_version;
+    active_version->last_modified_time = time(0);
     return true;
 }
 void File::history(){
