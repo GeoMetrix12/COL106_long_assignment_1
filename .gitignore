@@ -1,0 +1,11 @@
+# Ignore compiled files
+*.o
+*.a
+*.exe
+filesystem
+program
+
+# Ignore IDE/workspace settings
+.vscode/
+*.swp
+.DS_Store
