@@ -92,12 +92,7 @@ int main(){
             }
             else{
                 File* file = file_map.get(filename);
-                FileLastMod top_recent = {file, file->active_version->last_modified_time};
-                FileSize top_size = {file, file->total_versions};
-                file_system.deleteFileRecent(top_recent);
-                file_system.deleteFileBiggest(top_size);
                 file->snapshot(message.size() > 1 ? message.substr(1) : "");
-                file_system.updateFile(file);
                 cout << "Snapshot created successfully for " << filename << endl;
             }
         }
