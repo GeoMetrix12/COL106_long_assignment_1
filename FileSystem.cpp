@@ -6,10 +6,10 @@ void FileSystem::updateFile(File* file){
     biggest_heap.insert({file, file->total_versions});
 }
 void FileSystem::deleteFileRecent(FileLastMod top){
-    recent_heap.delete_value(top);
+    recent_heap.delete_value(top.file->filename);
 }
 void FileSystem::deleteFileBiggest(FileSize top){
-    biggest_heap.delete_value(top);
+    biggest_heap.delete_value(top.file->filename);
 }
 void FileSystem::RecentFiles(int num){
     vector<FileLastMod> files;
@@ -22,6 +22,9 @@ void FileSystem::RecentFiles(int num){
             count++;
             files.push_back(top);
         }
+    }
+    if(count < num){
+        cout << "Only " << count << " files available." << endl;
     }
     for(auto const& file : files){
         recent_heap.insert(file);

@@ -1,18 +1,19 @@
 #ifndef HASHMAP_FILE_HPP
 #define HASHMAP_FILE_HPP
 
-#include "File.hpp"
 #include <string>
 #include <vector>
+using namespace std;
 
+template<typename T>
 class HashMap_File{
     private:
         class HashNode{
             public: 
                 string key;
-                File* value;
+                T value;
                 HashNode* next;
-                HashNode(string k, File* v);
+                HashNode(string k, T v);
         };
 
         vector<HashNode*> table;
@@ -27,8 +28,8 @@ class HashMap_File{
     public:
         HashMap_File(int initial_size = 16);
         ~HashMap_File();
-        void insert(const string& key, File* value);
-        File* get(const string& key);
+        void insert(const string& key, T value);
+        T get(const string& key);
         bool remove(const string& key);
 };
 

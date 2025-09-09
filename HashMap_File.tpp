@@ -1,17 +1,21 @@
 #include "HashMap_File.hpp"
-HashMap_File::HashNode::HashNode(string k, File* v){
+
+template<typename T>
+HashMap_File<T>::HashNode::HashNode(string k, T v){
     key = k;
     value = v;
     next = nullptr;
 }
-unsigned long HashMap_File::hash_function(const string& key){
+template<typename T>
+unsigned long HashMap_File<T>::hash_function(const string& key){
     unsigned long hash = 5381;
     for(char c : key){
         hash = ((hash << 5) + hash) + c;
     }
     return hash % max_size;
 }
-void HashMap_File::rehash(){  
+template<typename T>
+void HashMap_File<T>::rehash(){  
     int old_max = max_size;
     max_size *= 2;
     vector<HashNode*> new_table(max_size, nullptr);
@@ -27,12 +31,14 @@ void HashMap_File::rehash(){
     }
     table = std::move(new_table); // efficient transfer (creates an rvalue reference)
 }
-HashMap_File::HashMap_File(int initial_size){
+template<typename T>
+HashMap_File<T>::HashMap_File(int initial_size){
     max_size = initial_size;
     curr_size = 0;
     table.resize(max_size, nullptr);
 }
-HashMap_File::~HashMap_File(){
+template<typename T>
+HashMap_File<T>::~HashMap_File(){
     for(auto front: table){
         while(front != NULL){
             HashNode* temp = front;
@@ -41,7 +47,8 @@ HashMap_File::~HashMap_File(){
         }
     }
 }
-void HashMap_File::insert(const string& key, File* value){
+template<typename T>
+void HashMap_File<T>::insert(const string& key, T value){
     unsigned long idx = hash_function(key);
     HashNode* node = table[idx];
     while(node != nullptr){
@@ -59,7 +66,8 @@ void HashMap_File::insert(const string& key, File* value){
         rehash();
     }
 }
-File* HashMap_File::get(const string& key){
+template<typename T>
+T HashMap_File<T>::get(const string& key){
     unsigned long idx = hash_function(key);
     HashNode* node = table[idx];
     while(node != nullptr){
@@ -68,9 +76,10 @@ File* HashMap_File::get(const string& key){
         }
         node = node->next;
     }
-    return nullptr;
+    return T();
 }
-bool HashMap_File::remove(const string& key){
+template<typename T>
+bool HashMap_File<T>::remove(const string& key){
     unsigned long idx = hash_function(key);
     HashNode* node = table[idx];
     HashNode* prev = nullptr;

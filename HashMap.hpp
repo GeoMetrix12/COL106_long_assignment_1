@@ -31,4 +31,6 @@ class HashMap{
         bool remove(int key);
 };
 
+#include "HashMap_File.tpp"
+
 #endif

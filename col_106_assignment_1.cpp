@@ -93,7 +93,6 @@ int main(){
             else{
                 File* file = file_map.get(filename);
                 file->snapshot(message.size() > 1 ? message.substr(1) : "");
-                cout << "Snapshot created successfully for " << filename << endl;
             }
         }
         else if(command == "ROLLBACK"){

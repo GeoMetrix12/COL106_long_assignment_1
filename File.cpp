@@ -70,6 +70,7 @@ void File::snapshot(const string& msg){
         active_version->snapshot_timestamp = time(0);
         active_version->last_modified_time = time(0);
         active_version->message = msg;
+        cout << "Snapshot created successfully for " << filename << endl;
     }
 }
 bool File::rollback(const int& v_id){
