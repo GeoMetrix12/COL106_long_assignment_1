@@ -9,7 +9,7 @@ using namespace std;
 
 int main(){ 
     fastio();
-    HashMap_File file_map;
+    HashMap_File<File*> file_map;
     FileSystem file_system;
     string line;
     while(getline(cin, line)){
