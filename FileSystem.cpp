@@ -2,7 +2,7 @@
 #include <iostream>
 
 void FileSystem::updateFile(File* file){
-    recent_heap.insert({file, file->active_version->last_modified_time});
+    recent_heap.insert({file, file->last_modified_time});
     biggest_heap.insert({file, file->total_versions});
 }
 void FileSystem::deleteFileRecent(FileLastMod top){
@@ -17,7 +17,7 @@ void FileSystem::RecentFiles(int num){
     while(!recent_heap.empty() && count < num){
         auto top = recent_heap.top();
         recent_heap.extract_max();
-        if(top.file->active_version->last_modified_time == top.last_modified){
+        if(top.file->last_modified_time == top.last_modified){
             cout << "File: " << top.file->filename << ", Last Modified: " << ctime(&top.last_modified);
             count++;
             files.push_back(top);

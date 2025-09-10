@@ -14,6 +14,7 @@ class File{
         string filename;
         TreeNode* active_version;
         int total_versions;
+        time_t last_modified_time;
         File(const string& name, HashMap& v_map);
         ~File();
         void read() const;

@@ -56,7 +56,7 @@ int main(){
             }
             else{
                 File* file = file_map.get(filename);
-                FileLastMod top_recent = {file, file->active_version->last_modified_time};
+                FileLastMod top_recent = {file, file->last_modified_time};
                 FileSize top_size = {file, file->total_versions};
                 file_system.deleteFileRecent(top_recent);
                 file_system.deleteFileBiggest(top_size);
@@ -74,7 +74,7 @@ int main(){
             }
             else{
                 File* file = file_map.get(filename);
-                FileLastMod top_recent = {file, file->active_version->last_modified_time};
+                FileLastMod top_recent = {file, file->last_modified_time};
                 FileSize top_size = {file, file->total_versions};
                 file_system.deleteFileRecent(top_recent);
                 file_system.deleteFileBiggest(top_size);
@@ -115,7 +115,7 @@ int main(){
                         }
                     }
                     File* file = file_map.get(filename);
-                    FileLastMod top_recent = {file, file->active_version->last_modified_time};
+                    FileLastMod top_recent = {file, file->last_modified_time};
                     FileSize top_size = {file, file->total_versions};
                     if(file->rollback(ver_id)){
                         file_system.deleteFileRecent(top_recent);
@@ -129,7 +129,7 @@ int main(){
                 }
                 else{
                     File* file = file_map.get(filename);
-                    FileLastMod top_recent = {file, file->active_version->last_modified_time};
+                    FileLastMod top_recent = {file, file->last_modified_time};
                     FileSize top_size = {file, file->total_versions};
                     if(file->rollback()){
                         file_system.deleteFileRecent(top_recent);
