@@ -8,8 +8,9 @@ class FileSize{
         File* file;
         int total_versions;
 
-        bool operator>(const FileSize& other) const;
-        bool operator==(const FileSize& other) const;
+    bool operator>(const FileSize& other) const;
+    bool operator<(const FileSize& other) const;
+    bool operator==(const FileSize& other) const;
 };
 
 #endif
