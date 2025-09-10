@@ -12,7 +12,9 @@ int main(){
     HashMap_File<File*> file_map;
     FileSystem file_system;
     string line;
+    int command_count = 0;
     while(getline(cin, line)){
+        command_count++;
         if(line.empty()){
             continue;
         }
@@ -31,6 +33,7 @@ int main(){
             else{
                 File* new_file = new File(filename, *(new HashMap()));
                 file_map.insert(filename, new_file);
+                new_file->last_execution_number = command_count;
                 file_system.updateFile(new_file);
                 cout << "File " << filename << " created successfully." << endl;
             }
@@ -61,6 +64,7 @@ int main(){
                 file_system.deleteFileRecent(top_recent);
                 file_system.deleteFileBiggest(top_size);
                 file->insert_content(content.size() > 1 ? content.substr(1) : "");
+                file->last_execution_number = command_count;
                 file_system.updateFile(file);
                 cout << "Content inserted successfully in " << filename << endl;
             }
@@ -79,6 +83,7 @@ int main(){
                 file_system.deleteFileRecent(top_recent);
                 file_system.deleteFileBiggest(top_size);
                 file->update_content(content.size() > 1 ? content.substr(1) : "");
+                file->last_execution_number = command_count;
                 file_system.updateFile(file);
                 cout << "Content updated successfully in " << filename << endl;
             }

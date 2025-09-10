@@ -16,6 +16,7 @@ File::File(const string& name, HashMap& v_map) : version_map(v_map), filename(na
     root = new TreeNode(0, "", "Initial Snapshot for root", nullptr, time(0), time(0));
     active_version = root;
     last_modified_time = time(0);
+    last_execution_number = 0;
     version_map.insert(0, root);
 }
 File::~File(){
@@ -40,6 +41,7 @@ void File::insert_content(const string& new_content){
         active_version = new_version;
         version_map.insert(total_versions, new_version);
         total_versions++;
+        last_modified_time = time(0);
     }
 }
 void File::update_content(const string& upd_content){
@@ -58,6 +60,7 @@ void File::update_content(const string& upd_content){
         active_version = new_version;
         version_map.insert(total_versions, new_version);
         total_versions++;
+        last_modified_time = time(0);
     }
 }
 void File::snapshot(const string& msg){

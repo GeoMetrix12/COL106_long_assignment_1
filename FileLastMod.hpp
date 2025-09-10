@@ -9,8 +9,9 @@ class FileLastMod{
         File* file;
         time_t last_modified;
 
-        bool operator>(const FileLastMod& other) const;
-        bool operator==(const FileLastMod& other) const;
+    bool operator>(const FileLastMod& other) const;
+    bool operator==(const FileLastMod& other) const;
+    bool operator<(const FileLastMod& other) const;
 };
 
 #endif

@@ -6,7 +6,7 @@ bool FileSize::operator>(const FileSize& other) const {
     } else if (total_versions < other.total_versions) {
         return false;
     } else {
-        return file->last_modified_time > other.file->last_modified_time;
+        return file->last_execution_number > other.file->last_execution_number;
     }
 }
 
@@ -16,7 +16,7 @@ bool FileSize::operator<(const FileSize& other) const {
     } else if (total_versions > other.total_versions) {
         return false;
     } else {
-        return file->last_modified_time < other.file->last_modified_time;
+        return file->last_execution_number < other.file->last_execution_number;
     }
 }
 
