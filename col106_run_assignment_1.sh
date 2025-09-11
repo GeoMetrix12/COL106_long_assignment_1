@@ -3,3 +3,4 @@ g++ -std=c++14 col_106_assignment_1.cpp TreeNode.cpp HashMap.cpp File.cpp FileLa
 echo "Type your commands interactively. Use CTRL+D or type 'EXIT' to quit."
 
 ./col_106_assignment_1
+rm ./col_106_assignment_1
